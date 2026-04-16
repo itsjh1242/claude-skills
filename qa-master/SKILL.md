@@ -1,7 +1,8 @@
 ---
-version: 1.2.0
-updated: 2025-04-15
+version: 2.0.0
+updated: 2025-04-16
 changelog:
+  - "2.0.0: Auto-execute QA without user prompt — auto-improve loop until all items reach grade A (max 3 rounds)"
   - "1.2.0: Force QA block output — CLI must append a fixed QA prompt block, not just internally check"
   - "1.1.0: Strengthen CLAUDE.md trigger — use mandatory check instead of passive suggestion"
   - "1.0.0: Initial release"
@@ -17,10 +18,10 @@ You MUST perform all of the following steps before doing anything else:
 2. If the file does NOT exist → this is a fresh install. Go to Step 1.
 3. If the file exists → extract the `version:` value from its YAML frontmatter
    - If the file has no `version` field → treat as `0.0.0`
-4. Compare the local version with `1.2.0` (this file's version):
-   - Local < `1.2.0` → go to **Update Flow**
-   - Local = `1.2.0` → output "qa-master is already up to date (v1.2.0)" and STOP. Do nothing else.
-5. You MUST output the comparison result: "Local: v{local} / Remote: v1.2.0 → {action}"
+4. Compare the local version with `2.0.0` (this file's version):
+   - Local < `2.0.0` → go to **Update Flow**
+   - Local = `2.0.0` → output "qa-master is already up to date (v2.0.0)" and STOP. Do nothing else.
+5. You MUST output the comparison result: "Local: v{local} / Remote: v2.0.0 → {action}"
 
 ### Update Flow
 When updating from an older version:
@@ -50,28 +51,18 @@ Create the following directory at the project root:
 
 Fetch this SKILL.md file and save it as `.claude/skills/qa-master/SKILL.md`.
 
-> The CLI infers the SKILL.md URL from the GitHub URL it used to read this file,
-> then fetches the raw content and installs it into the project.
-
 ### Step 3 — Add to CLAUDE.md
 Add the following instructions to `CLAUDE.md` at the project root (create it if it doesn't exist):
 
 ```
 # QA Master
-독립적으로 동작 가능한 기능 단위의 코드 변경을 완료했을 때,
-"다음 작업" 또는 "계속할까요" 를 묻기 전에 반드시 아래 블록을 응답 끝에 추가한다:
-
----
-**QA 평가 가능**: 이 기능이 완성된 것으로 보입니다. QA 평가를 수행할까요?
-→ Yes: `.claude/skills/qa-master/SKILL.md`를 읽고 Phase 2A + 2B를 수행합니다.
-→ No: 건너뛰고 계속합니다.
----
-
-이 블록을 생략하지 않는다. 자체 요약으로 대체하지 않는다.
-완성된 기능인지 확실하지 않으면, 블록을 포함한다.
-- 스킬 위치: .claude/skills/qa-master/SKILL.md
-- 리포트 저장: .dev/qa/reports/
-- 상태 파일: .dev/qa/pending.md
+When a unit of independently runnable feature code is completed,
+you MUST read `.claude/skills/qa-master/SKILL.md` and execute QA automatically
+BEFORE asking "what's next" or "shall I continue".
+Do NOT ask the user whether to run QA. Just run it and output the results.
+- Skill location: .claude/skills/qa-master/SKILL.md
+- Report storage: .dev/qa/reports/
+- State file: .dev/qa/pending.md
 ```
 
 ### Step 4 — Verify
@@ -83,14 +74,15 @@ Add the following instructions to `CLAUDE.md` at the project root (create it if 
 ---
 
 ## Role
-A skill that proposes and performs QA when it determines that a feature implementation is complete.
+A skill that automatically executes QA when it determines that a feature implementation is complete, and auto-improves the code until all evaluation items reach grade A.
 
 ## Trigger Condition
 The CLI judges on its own by combining the following context — not by keyword matching:
 - Was code for a specific feature unit written or modified in the recent conversation?
 - Is that code in a state where it can operate independently?
 - Is the user showing intent to move on to the next task?
-When all three are judged to be true, the CLI proposes QA at the end of its response.
+
+When all three are judged to be true, the CLI **immediately executes QA** without asking the user.
 
 ## Phase 1 — Project Analysis (Automatic)
 - Detect project type (RAG, CLI, API server, web app, etc.)
@@ -140,9 +132,50 @@ Determined by the environment variable `QA_MODE=dev|prod`. Default is `dev`.
 
 If any single item falls below the threshold, Phase 2B is marked FAIL.
 
+## Phase 2C — Auto-Improve Loop (NEW)
+After Phase 2A + 2B, if any evaluation item is below grade A, the CLI automatically enters the improvement loop.
+
+### Loop Flow
+```
+Round 1: Phase 2A + 2B → check all items
+  → All items grade A? → YES → PASS → go to Phase 3
+  → NO → identify items below A → analyze root cause → auto-fix code → re-run Phase 2A + 2B
+
+Round 2: re-evaluate
+  → All items grade A? → YES → PASS → go to Phase 3
+  → NO → auto-fix again → re-run
+
+Round 3: re-evaluate
+  → All items grade A? → YES → PASS → go to Phase 3
+  → NO → STOP loop → go to Phase 3 with current state
+```
+
+### Loop Rules
+1. **Goal**: All evaluation items (Core + Standard) must reach grade A
+2. **Max rounds**: 3 (initial evaluation counts as round 1)
+3. **Per-round actions**:
+   - Identify all items below grade A
+   - Analyze the root cause for each item
+   - Apply targeted code fixes
+   - Re-run Phase 2A + 2B to measure improvement
+4. **Loop exit conditions**:
+   - All items reach grade A → exit with PASS
+   - Round 3 completed without reaching all-A → exit, save current state
+5. **After max rounds without all-A**:
+   - Save the report with the best result achieved
+   - Output a summary of remaining issues to the user
+   - The user decides next steps manually
+
+### Improvement Strategy
+When fixing code to improve grades:
+- Fix one root cause at a time — avoid shotgun changes
+- Prioritize Core items over Standard items
+- Preserve existing passing behavior — do not regress
+- Each fix should be minimal and targeted
+
 ## Phase 3 — Report Storage
 - Save to `.dev/qa/reports/{feature-name}.md`
-- Record 2A and 2B results in separate sections
+- Record 2A, 2B, and 2C (loop history) results in separate sections
 - Update `.dev/qa/pending.md` state
 - If a feature is modified or deleted, update or delete the corresponding report accordingly
 
@@ -162,6 +195,8 @@ At the start of each QA session, the CLI checks existing reports against the cur
 **Evaluated at**: {datetime}
 **Feature description**: {one-line description of the feature}
 **QA_MODE**: dev | prod
+**Rounds**: {number of rounds executed} / 3
+**Final result**: ALL-A / PARTIAL (details below)
 
 ---
 
@@ -200,8 +235,20 @@ At the start of each QA session, the CLI checks existing reports against the cur
 
 ---
 
+## Phase 2C — Auto-Improve Loop History
+
+| Round | Items below A | Fix applied | Result after fix |
+|-------|--------------|-------------|-----------------|
+| 1     | {list}       | (initial)   | {grades}        |
+| 2     | {list}       | {description}| {grades}       |
+| 3     | {list}       | {description}| {grades}       |
+
+**Loop outcome**: ALL-A reached at round {n} / Stopped after 3 rounds — {remaining issues}
+
+---
+
 ## Summary
-{Improvement suggestions and next actions}
+{Improvement suggestions and next actions if ALL-A was not reached}
 ```
 
 ## State Management (`.dev/qa/pending.md`)

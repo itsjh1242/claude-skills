@@ -1,8 +1,8 @@
 # qa-master
 
-A Claude Code skill that automatically evaluates feature quality when implementation is complete.
+A Claude Code skill that automatically evaluates and improves feature quality when implementation is complete.
 
-Rather than being triggered by a slash command, qa-master reads the conversation context and code changes to judge on its own when a feature is ready — then naturally proposes a QA session.
+Rather than being triggered by a slash command, qa-master reads the conversation context and code changes to judge on its own when a feature is ready — then **automatically runs QA and improves the code until all items reach grade A**.
 
 ---
 
@@ -28,8 +28,19 @@ Supports **dev / prod mode** via `QA_MODE` environment variable:
 | `dev` (default) | All ≥ C | All Core ≥ B |
 | `prod` | All ≥ B | All Core ≥ A |
 
+### Phase 2C — Auto-Improve Loop
+After evaluation, if any item is below grade A, the CLI **automatically fixes the code and re-evaluates** — up to 3 rounds. The goal is for every item (Core + Standard) to reach grade A.
+
+| Round | Action |
+|-------|--------|
+| 1 | Initial evaluation |
+| 2 | Fix items below A → re-evaluate |
+| 3 | Fix remaining items → final evaluation |
+
+If all items reach grade A before round 3, the loop exits early. If grade A is not fully achieved after 3 rounds, the current state is reported and the user decides next steps.
+
 ### Reports
-QA results are saved as Markdown files under `.dev/qa/reports/`. Reports are kept in sync with the codebase — updated when features change, deleted when features are removed.
+QA results are saved as Markdown files under `.dev/qa/reports/`. Reports include the full improvement loop history (per-round grades and fixes applied). Reports are kept in sync with the codebase — updated when features change, deleted when features are removed.
 
 ---
 
