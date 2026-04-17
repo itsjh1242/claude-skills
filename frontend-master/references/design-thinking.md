@@ -1,4 +1,4 @@
-# Design Guide
+# Design Thinking Guide
 
 Loaded by Frontend Master when implementing visual/UI work or making styling decisions.
 
@@ -98,3 +98,65 @@ When starting fresh, choose a direction that serves the project's purpose:
 - **Art deco/geometric**: sharp angles, symmetry, metallic accents
 - **Soft/pastel**: gentle gradients, rounded forms, light palette
 - **Industrial/utilitarian**: functional, dense, data-dense
+
+## Brand Design Systems (awesome-design-md)
+
+### When to Use Reference Brand Systems
+
+When you need concrete, battle-tested design patterns from real companies:
+
+- **Brand alignment**: Client wants "Stripe-like" or "Linear-style" UI
+- **Design blockage**: Aesthetic direction unclear — use brand system as starting point
+- **Component patterns**: Need reference for specific component types (tables, modals, navigation)
+- **Color inspiration**: See how successful brands structure their palettes
+
+### How to Use
+
+1. Visit [awesome-design-md](https://github.com/VoltAgent/awesome-design-md)
+2. Browse 68+ brand DESIGN.md files
+3. Find brand matching your aesthetic direction or client requirements
+4. Reference their color palette, typography rules, component patterns
+5. Adapt to your project — don't copy, use as foundation
+
+### Popular Brand Quick Reference
+
+| Brand | Aesthetic | Best For |
+|-------|-----------|----------|
+| **Vercel** | Minimal + Monochrome + Geometric | Developer tools, technical products |
+| **Stripe** | Vibrant gradients + Clean typography | Fintech, payments, polished SaaS |
+| **Linear** | Dark-first + Subtle animations | Productivity tools, modern apps |
+| **Notion** | Editorial + Content-focused | Documentation, content platforms |
+| **Apple** | Premium + Refined whitespace | Consumer products, luxury tech |
+| **GitHub** | Functional + Dense information | Developer platforms, data-heavy |
+| **Discord** | Playful + Rounded + Colorful | Community, social, gaming |
+| **Figma** | Creative + Multi-color tools | Design tools, creative platforms |
+| **Airbnb** | Warm + Photographic + Human | Marketplace, lifestyle, travel |
+| **Shopify** | Clean + Green + E-commerce | Online stores, retail platforms |
+
+### Example Workflow
+
+```
+1. Client: "We want something Linear-like"
+2. → Check Linear DESIGN.md from awesome-design-md
+3. → Extract: dark mode palette, Inter/Geist fonts, subtle animations
+4. → Apply to project with brand-specific colors/content
+5. → Result: Familiar patterns but unique identity
+```
+
+### Important Notes
+
+- **Starting point, not template**: Use brand systems as reference, then customize
+- **Respect brand identity**: Don't clone — capture the *principles*, not the pixels
+- **Combine selectively**: Mix color palette from one brand, typography from another
+- **Client alignment**: If client references a brand, pull that DESIGN.md first
+
+### Integration with This Guide
+
+Think of brand design systems as **concrete examples** of the aesthetic directions listed above:
+
+- **Brutally minimal** → Vercel, Apple
+- **Luxury/refined** → Apple, Notion
+- **Playful/toy-like** → Discord, Figma
+- **Industrial/utilitarian** → GitHub, Linear
+
+When you choose an aesthetic direction, reference 2-3 matching brands to see how they implement it.
