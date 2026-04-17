@@ -12,31 +12,28 @@ A comprehensive frontend development skill that takes full ownership of all fron
 - **Implements** components following Next.js App Router best practices with Server Components
 - **Styles** with Tailwind CSS + shadcn/ui by default, following anti-AI aesthetic rules
 - **Converts** design references (images, Figma) to pixel-perfect code
-- **Verifies** accessibility (WCAG 2.2 AA), responsive design, Core Web Vitals, and performance budget
-- **Tests** with Playwright browser testing and automated accessibility scripts
-- **Auto-fixes** a11y, responsive, and performance issues without asking
+- **Verifies** accessibility (WCAG AA), responsive design, and Core Web Vitals
+- **Auto-fixes** a11y and responsive issues without asking
 
 ### Tech Stack
 - React + Next.js (App Router)
 - TypeScript (strict)
 - Tailwind CSS + shadcn/ui
 - Server Components by default
-- Playwright for browser testing
 
 ### 4 Phases
 | Phase | Name | When |
 |-------|------|------|
-| 1 | Analysis | Always — project context, task scope, existing components, design direction |
-| 2 | Design | Scope-dependent — design thinking, component architecture, style strategy, implementation plan |
-| 3 | Implementation | Always — component creation, styling, state management, design-to-code, error handling |
-| 4 | Verification | Always — WCAG 2.2 AA accessibility, responsive design, Core Web Vitals, browser testing with auto-fix |
+| 1 | Analysis | Always — project context, task scope, existing components |
+| 2 | Design | Scope-dependent — design thinking, component architecture, implementation plan |
+| 3 | Implementation | Always — component creation, styling, state management, design-to-code |
+| 4 | Verification | Always — accessibility, responsive, performance, auto-fix |
 
 ### v2.0 Highlights
-- **Design aesthetics**: 11 aesthetic directions, anti-AI-slop rules, typography/color/motion/spatial guidelines
-- **Component architecture**: composition over configuration, colocated files, state management decision tree
-- **Performance**: Core Web Vitals targets (LCP ≤2.5s, INP ≤200ms, CLS ≤0.1), performance budget, anti-pattern detection
-- **Accessibility**: WCAG 2.2 AA with automated Playwright test scripts for focus, reflow, spacing, target size
-- **Browser testing**: Playwright-based with reconnaissance-then-action pattern
+- **Routing table pattern**: SKILL.md as lightweight router (~200 lines), detailed guides in `references/` loaded on-demand to minimize token cost
+- **Design aesthetics**: Design thinking framework, 11 aesthetic directions, anti-AI-slop rules, typography/color/motion/spatial guidelines
+- **Component architecture**: Composition over configuration, colocated files, state management decision tree
+- **Performance targets**: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1
 
 ---
 
@@ -62,7 +59,10 @@ Claude will read the SKILL.md file and set up the required directories, install 
 ├── .claude/
 │   └── skills/
 │       └── frontend-master/
-│           └── SKILL.md
+│           ├── SKILL.md
+│           └── references/
+│               ├── design-guide.md       (design aesthetics, loaded on-demand)
+│               └── architecture-guide.md (component patterns, loaded on-demand)
 ├── .dev/
 │   └── frontend/
 │       ├── components/     (component catalog)
