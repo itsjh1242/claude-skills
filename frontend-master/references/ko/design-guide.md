@@ -34,6 +34,32 @@
 - 엄격한 계층 확립: h1 → h2 → h3 → body → small
 - 0.25rem(4px) 단위의 일관된 간격 스케일 사용
 
+### 미학 방향별 폰트 페어링
+
+| 방향성 | 디스플레이 폰트 (제목) | 본문 폰트 (가독성) | 분위기 |
+|-----------|------------------------|---------------------|------|
+| **Brutally minimal** | Space Grotesk, Syncopate | Inter, Space Grotesk (light) | 날카로움, 기하학적, 반성 없음 |
+| **Maximalist chaos** | Abril Fatface, Rage Italic | Space Mono, IBM Plex Mono | 밀도 높은, 시끄러운, 압도적 |
+| **Retro-futuristic** | Orbitron, Press Start 2P | Rajdhani, VT323 | 향수 어린 기술, 아케이드 |
+| **Organic/natural** | Comfortaa, Alegreya | Quicksand, Lora | 유동적, 따뜻함, 인간적 |
+| **Luxury/refined** | Cormorant Garamond, Playfair Display | Lato, EB Garamond | 프리미엄, 우아함, 시대를 초월 |
+| **Playful/toy-like** | Fredoka, Poppins | Nunito, Quicksand | 재미, 친근함, 입체감 |
+| **Editorial/magazine** | Merriweather, Source Serif Pro | Libre Baskerville, Source Sans Pro | 콘텐츠 우선, 저널리스트 |
+| **Brutalist/raw** | Archivo Black, Bebas Neue | Archivo, Roboto Mono | 노출, 산업적, 원시적 |
+| **Art deco/geometric** | Monoton, Righteous | Montserrat, Work Sans | 날카로운 각도, 대칭 |
+| **Soft/pastel** | Nunito, Muli | Quicksand, Poppins | 부드러운, 둥근, 가벼움 |
+| **Industrial/utilitarian** | JetBrains Mono, Space Mono | IBM Plex Sans, Roboto | 기능적, 밀도 높은, 기술적 |
+
+### 안전한 기본값 (불확실할 때)
+
+미학 방향성이 불확실할 때, 대부분의 프로젝트에 잘 맞는 선택:
+- **테크/스타트업**: Plus Jakarta Sans (디스플레이) + Inter (본문)
+- **콘텐츠/에디토리얼**: Source Serif Pro (디스플레이) + Source Sans Pro (본문)
+- **이커머스**: Poppins (디스플레이) + Open Sans (본문)
+- **SaaS**: Geist (디스플레이) + Geist Sans (본문)
+
+위 모든 폰트는 Google Fonts에서 무료로 제공되며 `next/font/google`로 쉽게 로드 가능하다.
+
 ## 색상
 
 - **시맨틱 토큰** 사용 (`text-primary`, `bg-surface`, `border-muted`), 원시 hex 값이 아님

@@ -34,6 +34,32 @@ Rules:
 - Establish a strict hierarchy: h1 → h2 → h3 → body → small
 - Use consistent spacing scale in 0.25rem (4px) increments
 
+### Font Pairing by Aesthetic Direction
+
+| Direction | Display Font (headings) | Body Font (reading) | Vibe |
+|-----------|------------------------|---------------------|------|
+| **Brutally minimal** | Space Grotesk, Syncopate | Inter, Space Grotesk (light) | Stark, geometric, unapologetic |
+| **Maximalist chaos** | Abril Fatface, Rage Italic | Space Mono, IBM Plex Mono | Dense, loud, overwhelming |
+| **Retro-futuristic** | Orbitron, Press Start 2P | Rajdhani, VT323 | Nostalgic tech, arcade |
+| **Organic/natural** | Comfortaa, Alegreya | Quicksand, Lora | Flowing, warm, human |
+| **Luxury/refined** | Cormorant Garamond, Playfair Display | Lato, EB Garamond | Premium, elegant, timeless |
+| **Playful/toy-like** | Fredoka, Poppins | Nunito, Quicksand | Fun, approachable, dimensional |
+| **Editorial/magazine** | Merriweather, Source Serif Pro | Libre Baskerville, Source Sans Pro | Content-first, journalistic |
+| **Brutalist/raw** | Archivo Black, Bebas Neue | Archivo, Roboto Mono | Exposed, industrial, raw |
+| **Art deco/geometric** | Monoton, Righteous | Montserrat, Work Sans | Sharp angles, symmetry |
+| **Soft/pastel** | Nunito, Muli | Quicksand, Poppins | Gentle, rounded, light |
+| **Industrial/utilitarian** | JetBrains Mono, Space Mono | IBM Plex Sans, Roboto | Functional, dense, technical |
+
+### Safe Defaults (When Uncertain)
+
+If the aesthetic direction is unclear, these work for most projects:
+- **Tech/Startup**: Plus Jakarta Sans (display) + Inter (body)
+- **Content/Editorial**: Source Serif Pro (display) + Source Sans Pro (body)
+- **E-commerce**: Poppins (display) + Open Sans (body)
+- **SaaS**: Geist (display) + Geist Sans (body)
+
+All fonts above are available on Google Fonts (free, easy loading via `next/font/google`).
+
 ## Color
 
 - Use **semantic tokens** (`text-primary`, `bg-surface`, `border-muted`), not raw hex values
