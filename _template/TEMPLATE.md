@@ -39,6 +39,9 @@
 | `{{SKILL_TITLE}}` | 스킬 표시 이름 (Title Case) | `Planner Master` |
 | `{{SKILL_DESC_EN}}` | 영문 한 줄 설명 | `A skill that automatically creates development plans` |
 | `{{SKILL_DESC_KO}}` | 한국어 한 줄 설명 | `개발 계획을 자동으로 생성하는 스킬` |
+| `{{SKILL_DESC_SHORT}}` | description 첫 줄 (스킬 역할 요약) | `Development planning expert skill.` |
+| `{{TRIGGER_CONDITIONS}}` | TRIGGER when 조건 | `user asks to plan, design architecture, or create specs` |
+| `{{NO_TRIGGER_CONDITIONS}}` | DO NOT TRIGGER when 조건 | `simple code edits, bug fixes, or non-planning tasks` |
 | `{{SKILL_VERSION}}` | 초기 버전 (항상 `1.0.0`) | `1.0.0` |
 | `{{SKILL_DATE}}` | 생성 날짜 (YYYY-MM-DD) | `2025-04-16` |
 | `{{GITHUB_USER}}` | GitHub 사용자명 | `itsjh1242` |

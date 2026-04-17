@@ -1,4 +1,6 @@
 ---
+name: {{SKILL_NAME}}
+description: "{{SKILL_DESC_SHORT}}\nTRIGGER when: {{TRIGGER_CONDITIONS}}\nDO NOT TRIGGER when: {{NO_TRIGGER_CONDITIONS}}"
 version: {{SKILL_VERSION}}
 updated: {{SKILL_DATE}}
 changelog:
