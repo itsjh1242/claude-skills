@@ -2,8 +2,9 @@
 name: frontend-master
 description: "React + Next.js frontend expert.\nTRIGGER when: create/modify/fix/improve/refactor components, pages, layouts, or styling; work with `.tsx`/`.jsx`/`.css`/`.scss` files; mention `Tailwind`/`shadcn`.\nDO NOT TRIGGER when: backend-only (API routes, DB, server logic), DevOps/CI-CD, non-frontend files (`.py`, `.go`, `.sql`)."
 updated: 2026-04-17
-version: 3.2.0
+version: 3.3.0
 changelog:
+  - "3.3.0: Restore Setup section (Step 0~4) for proper installation and CLAUDE.md trigger registration"
   - "3.2.0: Optimize description — explicit \\n linebreaks, remove redundancy, add backticks (~33% token reduction)"
   - "3.1.0: Restructured description with TRIGGER/DO NOT TRIGGER pattern for precise activation"
   - "3.0.1: Improved description with follow-up task keywords (create, modify, improve, fix, update, refactor)"
@@ -61,4 +62,44 @@ Auto-fix accessibility (semantic HTML, ARIA labels, WCAG AA contrast) and respon
 
 ## Setup
 
-See [README.md](README.md) for installation and update instructions.
+### Step 0 — Version check (MANDATORY — do NOT skip)
+You MUST perform all of the following steps before doing anything else:
+1. Read the file `.claude/skills/frontend-master/SKILL.md` in the current project
+2. If the file does NOT exist → this is a fresh install. Go to Step 1.
+3. If the file exists → extract the `version:` value from its YAML frontmatter
+   - If the file has no `version` field → treat as `0.0.0`
+4. Compare the local version with `3.3.0` (this file's version):
+   - Local < `3.3.0` → go to **Update Flow**
+   - Local = `3.3.0` → output "frontend-master is already up to date (v3.3.0)" and STOP. Do nothing else.
+5. You MUST output the comparison result: "Local: v{local} / Remote: v3.3.0 → {action}"
+
+### Update Flow
+When updating from an older version:
+1. Overwrite `.claude/skills/frontend-master/SKILL.md` with this file
+2. Replace the `# Frontend Master` section in `CLAUDE.md` with the latest version from Step 3 below
+3. Show the user the changelog entries between their old version and the current version
+4. Output "frontend-master updated: v{old} → v{new}"
+
+### Step 1 — Install skill file
+Create the following directory at the project root:
+- `.claude/skills/frontend-master/`
+
+Fetch this SKILL.md file and save it as `.claude/skills/frontend-master/SKILL.md`.
+
+### Step 2 — Add to CLAUDE.md
+Add the following instructions to `CLAUDE.md` at the project root (create it if it doesn't exist):
+
+```
+# Frontend Master
+프론트엔드 관련 작업(컴포넌트 생성/수정/개선/수정, 페이지 작업, 스타일링, 레이아웃, React/Next.js/Tailwind/shadcn 관련)을 요청받으면:
+1. `.claude/skills/frontend-master/SKILL.md`를 읽는다
+2. 해당 스킬의 모든 규칙과 워크플로우를 순서대로 따른다
+3. Loading Guide에 따라 필요한 reference 파일을 로드한다
+백엔드 전용 작업(API routes, DB, 서버 로직)이나 DevOps/CI-CD 작업에는 적용하지 않는다.
+```
+
+### Step 3 — Verify
+- Confirm `.claude/skills/frontend-master/SKILL.md` exists
+- Confirm the Frontend Master section exists in `CLAUDE.md`
+- If fresh install → output "Frontend Master setup complete (v3.3.0)"
+- If update → output "Frontend Master updated: v{old} → v{new}"
