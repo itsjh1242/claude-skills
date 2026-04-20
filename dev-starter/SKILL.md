@@ -49,8 +49,10 @@ When updating from an older version:
 
 ### Step 1 — Install LLM Wiki
 
+> **Skip condition**: If the status table from Step 0 shows llm-wiki as "up-to-date", skip this entire step.
+
 #### 1-A. Create wiki directories
-Create the following paths at the project root:
+Create the following paths at the project root (skip any that already exist — do NOT overwrite existing files):
 
 ```
 .dev/wiki/
@@ -66,7 +68,7 @@ Create the following paths at the project root:
 └── log.md
 ```
 
-Initialize `.dev/wiki/index.md`:
+Initialize `.dev/wiki/index.md` (skip if file already exists):
 
 ```markdown
 # Wiki Index
@@ -99,7 +101,7 @@ Initialize `.dev/wiki/index.md`:
 |------|-------|--------------|
 ```
 
-Initialize `.dev/wiki/log.md`:
+Initialize `.dev/wiki/log.md` (skip if file already exists):
 
 ```markdown
 # Wiki Log
@@ -123,6 +125,8 @@ Fetch and save as `.claude/skills/llm-wiki/SKILL.md`:
 ---
 
 ### Step 2 — Install Claude Harness
+
+> **Skip condition**: If the status table from Step 0 shows harness-setup as "up-to-date", skip this entire step.
 
 #### 2-A. Create harness directories
 Create the following directories at the project root (skip any that already exist):
@@ -158,7 +162,9 @@ Fetch this SKILL.md and save as `.claude/skills/dev-starter/SKILL.md`:
 
 #### 3-B. Add to CLAUDE.md
 Add the following sections to `CLAUDE.md` at the project root (create it if it doesn't exist).
-If a section already exists, replace it entirely.
+- If a section already exists **and** the corresponding sub-skill was skipped (up-to-date), leave it as-is.
+- If a section already exists **but** the corresponding sub-skill was installed or updated, replace it entirely.
+- If a section does not exist, add it.
 
 ````
 # LLM Wiki
