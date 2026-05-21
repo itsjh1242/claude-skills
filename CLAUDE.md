@@ -16,3 +16,11 @@ Claude Code 마켓플레이스 플러그인 저장소.
 4. `skills/{command-name}/SKILL.md`를 작성한다 (프론트매터: `name` + `description`)
 5. `README.md`를 작성한다
 6. `docs/TEMPLATE.md` 하단 Reference 테이블에 새 플러그인을 추가한다
+
+## 플러그인 버전 관리
+
+플러그인 버전을 변경할 때 **반드시 두 곳 모두** 업데이트한다:
+1. `plugins/{plugin-name}/.claude-plugin/plugin.json` → `"version"` 필드
+2. `.claude-plugin/marketplace.json` → 해당 플러그인의 `"version"` 필드
+
+하나라도 빠지면 마켓플레이스에서 업데이트를 감지하지 못한다.
