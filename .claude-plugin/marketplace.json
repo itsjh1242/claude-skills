@@ -9,7 +9,6 @@
     {
       "name": "flutter-supabase-setup",
       "description": "Flutter + Supabase development environment setup. Auto-discovers planning docs, infers project config.",
-      "version": "1.1.0",
       "source": "./plugins/flutter-supabase-setup",
       "category": "development"
     }

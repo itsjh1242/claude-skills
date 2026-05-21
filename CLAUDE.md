@@ -19,8 +19,6 @@ Claude Code 마켓플레이스 플러그인 저장소.
 
 ## 플러그인 버전 관리
 
-플러그인 버전을 변경할 때 **반드시 두 곳 모두** 업데이트한다:
-1. `plugins/{plugin-name}/.claude-plugin/plugin.json` → `"version"` 필드
-2. `.claude-plugin/marketplace.json` → 해당 플러그인의 `"version"` 필드
-
-하나라도 빠지면 마켓플레이스에서 업데이트를 감지하지 못한다.
+- `plugin.json`과 `marketplace.json`에 `"version"` 필드를 **명시하지 않는다**
+- version을 생략하면 git commit SHA가 버전으로 사용되어, push할 때마다 자동으로 새 버전으로 인식된다
+- version을 명시하면 사용자의 로컬 캐시가 옛 버전을 물고 있어 업데이트를 감지하지 못하는 문제가 발생한다
