@@ -1,6 +1,6 @@
 # flutter-supabase-setup
 
-Flutter + Supabase **development environment** setup from planning documents. Creates project structure, installs dependencies, configures environment, and verifies the build. Generates zero feature code — only infrastructure.
+Flutter + Supabase **development environment** setup. Auto-discovers planning docs in project directory, infers project config (name, org, platform), and creates a ready-to-run project shell. Generates zero feature code — only infrastructure.
 
 ## Installation
 
@@ -16,10 +16,10 @@ Flutter + Supabase **development environment** setup from planning documents. Cr
 
 ### `/flutter-supabase-setup:init`
 
-Main setup. Reads a planning doc and creates a ready-to-run project.
+Main setup. Auto-discovers planning doc and creates a ready-to-run project.
 
-1. Analyzes planning document
-2. Collects project name, org, platforms (no Supabase credentials needed)
+1. Auto-discovers planning doc in project directory (`docs/`, root, keyword matching)
+2. Analyzes and proposes project config (name, org inferred from planning doc)
 3. Proposes tech stack with justifications
 4. User confirms
 5. Scaffolds: `flutter create` → folders → dependencies → boilerplate → config

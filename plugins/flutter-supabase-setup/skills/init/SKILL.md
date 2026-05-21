@@ -1,6 +1,6 @@
 ---
 name: init
-description: "기획서(마크다운)를 입력받아 Flutter + Supabase 개발환경을 셋업하는 스킬. 프로젝트 생성, 폴더 구조, 의존성 설치, 환경설정, 빌드 검증까지만 수행. 기능 코드(페이지, 위젯, 비즈니스 로직)는 일절 생성하지 않는다. Use when: user provides a planning doc and asks to set up a Flutter + Supabase project. Do NOT use when: debugging, implementing features, or non-setup tasks."
+description: "기획서(마크다운)를 프로젝트 폴더에서 자동 탐색하여 Flutter + Supabase 개발환경을 셋업하는 스킬. 프로젝트 생성, 폴더 구조, 의존성 설치, 환경설정, 빌드 검증까지만 수행. 기능 코드(페이지, 위젯, 비즈니스 로직)는 일절 생성하지 않는다. Use when: user asks to set up a Flutter + Supabase project. Do NOT use when: debugging, implementing features, or non-setup tasks."
 ---
 
 # Flutter + Supabase Setup — init
@@ -19,7 +19,7 @@ One-shot environment setup. Creates a buildable Flutter + Supabase project shell
 
 ## Trigger Condition
 
-Activate when the user provides a planning document and requests project setup. Do NOT activate for feature development, debugging, or code review.
+Activate when the user requests Flutter + Supabase project setup. 기획서는 프로젝트 폴더에서 자동으로 탐색한다 — 사용자에게 먼저 달라고 하지 않는다. Do NOT activate for feature development, debugging, or code review.
 
 ---
 
@@ -59,10 +59,15 @@ Activate when the user provides a planning document and requests project setup. 
 
 ---
 
-## Phase 1 — Planning Document Analysis
+## Phase 1 — Planning Document Discovery & Analysis
 
-1. Read the planning document
-2. Extract: core features, data model hints, technical requirements, auth needs, platform hints
+1. **자동 탐색**: 현재 프로젝트 디렉토리에서 기획서를 자동으로 찾는다. 탐색 순서:
+   - `docs/` 폴더 내 마크다운 파일 (`*.md`)
+   - 프로젝트 루트의 마크다운 파일 (README.md, CLAUDE.md 등 표준 파일 제외)
+   - 파일명에 `기획`, `plan`, `spec`, `요구사항`, `requirement`, `PRD` 등이 포함된 파일 우선
+   - 후보가 여러 개면 목록을 보여주고 사용자에게 선택을 요청
+   - 후보가 0개면 그때만 사용자에게 기획서 경로를 요청
+2. 기획서를 읽고 분석: core features, data model hints, technical requirements, auth needs
 3. Present analysis in Korean and wait for validation
 
 ```
@@ -85,24 +90,28 @@ Activate when the user provides a planning document and requests project setup. 
 
 ---
 
-## Phase 2 — Required Information Collection
+## Phase 2 — Project Info Proposal
 
-Ask **in a single message**. Only 3 items.
+사용자에게 묻지 말고, 기획서 분석 결과를 바탕으로 **직접 추론하여 제안**한다. 사용자는 확인/수정만 하면 된다.
 
-| Item | Description | Example |
-|---|---|---|
-| Project name | snake_case | `our_app` |
-| Organization | Reverse domain | `com.mycompany` |
-| Target platforms | Comma-separated | `android, ios, web` |
+- **프로젝트명**: 기획서의 앱 이름·성격에서 snake_case로 추론 (예: 커플 앱 → `couple_diary`, 할일 앱 → `task_flow`)
+- **조직명**: 기획서에 회사/팀 정보가 있으면 역도메인으로 추론, 없으면 `com.example` 사용
+- **플랫폼**: `android,ios` 고정 (Flutter 기본). 기획서에 "웹", "web", "데스크톱" 등이 명시된 경우에만 자동 추가
 
 Supabase credentials are NOT needed here. They are configured later via `/flutter-supabase-setup:env`.
 
-```
-다음 정보를 알려주세요:
+Phase 1 분석 결과와 함께 **한 메시지로** 아래 형식으로 제안:
 
-1. **프로젝트명** (snake_case, 예: `our_app`):
-2. **조직명** (역도메인, 예: `com.mycompany`):
-3. **지원 플랫폼** (android, ios, web 중 선택):
+```
+## 프로젝트 설정
+
+| 항목 | 값 | 근거 |
+|---|---|---|
+| 프로젝트명 | `{inferred_name}` | {기획서에서 추론한 이유} |
+| 조직명 | `{inferred_org}` | {근거 또는 "기획서에 명시 없어 기본값 사용"} |
+| 플랫폼 | `android, ios` | Flutter 기본 |
+
+이대로 진행할까요? 변경하고 싶은 항목이 있으면 말씀해주세요.
 ```
 
 ---
@@ -546,7 +555,8 @@ extension BuildContextX on BuildContext {
 - **NEVER generate feature code** — no pages, widgets, repositories, or business logic
 - **NEVER ask for Supabase credentials** — that is `/flutter-supabase-setup:env`
 - **NEVER skip user confirmation** — Phase 4 must complete before Phase 5
-- **NEVER ask unnecessary questions** — infer from the planning document
+- **NEVER ask unnecessary questions** — 기획서에서 추론 가능한 정보(프로젝트명, 조직명, 플랫폼 등)는 직접 제안하고 확인만 받는다
+- **NEVER ask for the planning document** — 프로젝트 폴더에서 자동 탐색한다. 못 찾을 때만 경로를 요청
 - **ALWAYS respond in Korean**
 - **ALWAYS run verification** (Phase 7) before declaring complete
 - **ALWAYS use `flutter pub add`** for dependencies
