@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "itsjh-plugins",
+  "description": "Custom Claude Code plugins by itsjh1242",
+  "owner": {
+    "name": "itsjh1242"
+  },
+  "plugins": [
+    {
+      "name": "flutter-supabase-setup",
+      "description": "Flutter + Supabase development environment setup from planning documents",
+      "source": "./plugins/flutter-supabase-setup",
+      "category": "development"
+    }
+  ]
+}

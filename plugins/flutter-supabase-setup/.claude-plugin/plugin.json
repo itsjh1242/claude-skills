@@ -1,0 +1,10 @@
+{
+  "name": "flutter-supabase-setup",
+  "description": "Flutter + Supabase development environment setup from planning documents. Creates project structure, installs dependencies, and verifies the build. No feature code — only infrastructure.",
+  "version": "1.0.0",
+  "author": {
+    "name": "itsjh1242"
+  },
+  "repository": "https://github.com/itsjh1242/claude-skills",
+  "license": "MIT"
+}

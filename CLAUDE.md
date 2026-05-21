@@ -1,9 +1,18 @@
 # claude-skills
 
-## 새 스킬 생성
-사용자가 새로운 스킬을 만들어달라고 요청하면:
-1. `_template/TEMPLATE.md`를 먼저 읽고 변수 목록과 생성 절차를 확인한다
-2. 사용자의 스킬 이름과 설명을 기반으로 변수 값을 결정한다
-3. `_template/` 의 각 템플릿 파일을 읽고 변수를 치환하여 새 디렉토리에 생성한다
-4. Role, Trigger, Phase 등 스킬 고유 섹션은 사용자 설명을 기반으로 직접 작성한다
-5. 완료 후 `~/.claude/CLAUDE.md`에 트리거 등록을 안내한다
+Claude Code 마켓플레이스 플러그인 저장소.
+
+## 구조
+
+- `plugins/` — 마켓플레이스 플러그인 (각 하위 디렉토리가 하나의 플러그인)
+- `docs/TEMPLATE.md` — 새 플러그인 생성 시 참고하는 템플릿
+
+## 새 플러그인 생성
+
+사용자가 새로운 플러그인을 만들어달라고 요청하면:
+1. `docs/TEMPLATE.md`를 먼저 읽고 마켓플레이스 플러그인 구조를 확인한다
+2. `plugins/{plugin-name}/` 디렉토리를 생성한다
+3. `.claude-plugin/plugin.json` 매니페스트를 작성한다
+4. `skills/{command-name}/SKILL.md`를 작성한다 (프론트매터: `name` + `description`)
+5. `README.md`를 작성한다
+6. `docs/TEMPLATE.md` 하단 Reference 테이블에 새 플러그인을 추가한다
