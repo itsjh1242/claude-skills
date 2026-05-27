@@ -1,6 +1,6 @@
 ---
 name: daily-log-init
-description: "(daily-log) 초기 설정. tasks 레포 URL을 입력받아 로컬에 클론하고 설정 파일을 생성한다. Use when: user says 'daily-log 설정', 'daily-log init', '일일 로그 초기화', '업무일지 셋업'. Do NOT use when: already initialized and just wanting to log or check reminders."
+description: "초기 설정. tasks 레포 URL을 입력받아 로컬에 클론하고 설정 파일을 생성한다. Use when: user says 'daily-log 설정', 'daily-log init', '일일 로그 초기화', '업무일지 셋업'. Do NOT use when: already initialized and just wanting to log or check reminders."
 ---
 
 # daily-log — init

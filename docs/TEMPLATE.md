@@ -55,18 +55,43 @@ A single plugin can contain multiple skills (multiple directories under `skills/
 
 ```yaml
 ---
-name: "skill-command-name"
+name: "{plugin-name}-{command}"
 description: "What this skill does and when to use it. Claude uses this to decide whether to auto-invoke the skill."
 ---
 ```
 
 | Field | Required | Description |
 |---|---|---|
-| `name` | Yes | Skill command name. Used in `/{plugin-name}:{name}`. |
-| `description` | Yes | How Claude knows when to use this skill. Include trigger phrases and anti-triggers. |
+| `name` | Yes | Skill command name. **반드시 플러그인명을 접두사로 포함**해야 목록에서 `/{plugin}:{name}` 형태로 표시된다. |
+| `description` | Yes | How Claude knows when to use this skill. Include trigger phrases and anti-triggers. `(plugin-name)` 접두사는 Claude Code가 자동 추가하므로 description에 넣지 않는다. |
 | `disable-model-invocation` | No | Set `true` to disable auto-invocation (slash command only). Default: `false`. |
 
 **No `version`, `updated`, `changelog` in SKILL.md frontmatter.** Those belong in `plugin.json`.
+
+---
+
+## Skill Naming Convention (중요)
+
+스킬의 **디렉토리명**과 **frontmatter `name`**이 슬래시 명령어 표시 방식을 결정한다.
+
+**공식 문서 (https://code.claude.com/docs/en/skills):**
+> Plugin `skills/` subdirectory → Directory name, namespaced by plugin
+> `name` field sets the display label shown in skill listings.
+
+### 실제 동작 규칙
+
+| 디렉토리명 | frontmatter name | 목록 표시 | 비고 |
+|---|---|---|---|
+| `init` | `init` | `/init (plugin-name)` | 플러그인 식별 불가, 다른 스킬과 충돌 위험 |
+| `{plugin}-init` | `{plugin}-init` | `/{plugin}:{plugin}-init (plugin-name)` | 플러그인 식별 가능, 충돌 없음 |
+
+### 규칙
+
+1. **디렉토리명 = frontmatter `name`**: 항상 일치시킨다
+2. **플러그인명을 접두사로 포함**: `{plugin-name}-{command}` 형태로 명명한다
+   - 좋은 예: `daily-log-init`, `daily-log-log`, `daily-log-remind`
+   - 나쁜 예: `init`, `log`, `remind` (다른 플러그인/빌트인과 충돌)
+3. **description에 `(plugin-name)` 넣지 않기**: Claude Code가 자동으로 추가한다
 
 ---
 
@@ -79,7 +104,7 @@ Users invoke skills as:
 /{plugin-name}:{skill-name} arguments
 ```
 
-Example: `/flutter-supabase-setup:init`
+Example: `/daily-log:daily-log-init`
 
 ---
 
@@ -104,7 +129,18 @@ Example: `/flutter-supabase-setup:init`
 
 ### Option B: Self-hosted Marketplace
 
-Create a `marketplace.json` in a separate repo:
+`.claude-plugin/marketplace.json`을 레포 루트에 생성한다.
+
+**Source 형식** (공식 문서: https://code.claude.com/docs/en/plugin-marketplaces):
+
+| Source 종류 | 형식 | 설명 |
+|---|---|---|
+| 상대 경로 | `"./plugins/my-plugin"` | 같은 레포 내 플러그인. `./`로 시작. 마켓플레이스 루트 기준 |
+| GitHub | `{"source": "github", "repo": "owner/repo"}` | 외부 GitHub 레포 |
+| git-subdir | `{"source": "git-subdir", "url": "...", "path": "..."}` | 외부 레포의 하위 디렉토리 |
+| npm | `{"source": "npm", "package": "..."}` | npm 패키지 |
+
+**같은 레포 내 플러그인은 상대 경로(`"./plugins/..."`)를 사용한다:**
 
 ```json
 {
@@ -112,22 +148,22 @@ Create a `marketplace.json` in a separate repo:
   "owner": {
     "name": "itsjh1242"
   },
-  "description": "Custom Claude Code plugins",
   "plugins": [
     {
-      "name": "flutter-supabase-setup",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/itsjh1242/claude-skills.git",
-        "path": "plugins/flutter-supabase-setup"
-      },
-      "description": "Flutter + Supabase project scaffolding from planning docs"
+      "name": "my-plugin",
+      "source": "./plugins/my-plugin",
+      "description": "Plugin description"
     }
   ]
 }
 ```
 
-Users add with: `/plugin marketplace add owner/repo`
+**사용자 설치:**
+```
+/plugin marketplace add owner/repo
+/plugin install {plugin-name}@{marketplace-name}
+/plugin marketplace update          # 원격 변경사항 갱신
+```
 
 ---
 
