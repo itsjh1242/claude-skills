@@ -1,6 +1,6 @@
 ---
 name: init
-description: "기획서(마크다운)를 프로젝트 폴더에서 자동 탐색하여 Flutter + Supabase 개발환경을 셋업하는 스킬. 프로젝트 생성, 폴더 구조, 의존성 설치, 환경설정, 빌드 검증까지만 수행. 기능 코드(페이지, 위젯, 비즈니스 로직)는 일절 생성하지 않는다. Use when: user asks to set up a Flutter + Supabase project. Do NOT use when: debugging, implementing features, or non-setup tasks."
+description: "(flutter-supabase-setup) 기획서(마크다운)를 프로젝트 폴더에서 자동 탐색하여 Flutter + Supabase 개발환경을 셋업하는 스킬. 프로젝트 생성, 폴더 구조, 의존성 설치, 환경설정, 빌드 검증까지만 수행. 기능 코드(페이지, 위젯, 비즈니스 로직)는 일절 생성하지 않는다. Use when: user asks to set up a Flutter + Supabase project. Do NOT use when: debugging, implementing features, or non-setup tasks."
 ---
 
 # Flutter + Supabase Setup — init

@@ -1,6 +1,6 @@
 ---
-name: daily-log-remind
-description: "최근 로그에서 미완료 Remind 항목을 표시한다. 현재 프로젝트의 이어서 할 작업 목록을 보여준다. Use when: user says '리마인드', 'remind', '할 일 확인', '어제 뭐 남았지', '이어서 할 거', '미완료'. Do NOT use when: user wants to write a new log (use log), or initial setup (use init)."
+name: remind
+description: "(daily-log) 최근 로그에서 미완료 Remind 항목을 표시한다. 현재 프로젝트의 이어서 할 작업 목록을 보여준다. Use when: user says '리마인드', 'remind', '할 일 확인', '어제 뭐 남았지', '이어서 할 거', '미완료'. Do NOT use when: user wants to write a new log (use log), or initial setup (use init)."
 ---
 
 # daily-log — remind
@@ -16,7 +16,7 @@ description: "최근 로그에서 미완료 Remind 항목을 표시한다. 현�
 1. `~/.daily-log/config.json` 존재 확인. 없으면:
    ```
    daily-log이 아직 설정되지 않았습니다.
-   `/daily-log:daily-log-init`을 먼저 실행해주세요.
+   `/daily-log:init`을 먼저 실행해주세요.
    ```
 2. config를 읽어 `local_path`, `default_branch` 확인
 
@@ -91,7 +91,7 @@ cd {local_path} && git pull origin {default_branch}
 ## 미완료 리마인드
 
 아직 기록된 로그가 없습니다.
-`/daily-log:daily-log-log`로 첫 로그를 기록해보세요.
+`/daily-log:log`로 첫 로그를 기록해보세요.
 ```
 
 ---

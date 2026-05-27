@@ -55,15 +55,15 @@ A single plugin can contain multiple skills (multiple directories under `skills/
 
 ```yaml
 ---
-name: "{plugin-name}-{command}"
-description: "What this skill does and when to use it. Claude uses this to decide whether to auto-invoke the skill."
+name: "{command}"
+description: "({plugin-name}) What this skill does and when to use it."
 ---
 ```
 
 | Field | Required | Description |
 |---|---|---|
-| `name` | Yes | Skill command name. **반드시 플러그인명을 접두사로 포함**해야 목록에서 `/{plugin}:{name}` 형태로 표시된다. |
-| `description` | Yes | How Claude knows when to use this skill. Include trigger phrases and anti-triggers. `(plugin-name)` 접두사는 Claude Code가 자동 추가하므로 description에 넣지 않는다. |
+| `name` | Yes | 스킬 명령어 이름. 디렉토리명과 일치시킨다. |
+| `description` | Yes | **`(plugin-name)` 접두사를 반드시 포함**한다. Claude가 auto-invoke 여부를 판단하는 데 사용. trigger/anti-trigger 포함. |
 | `disable-model-invocation` | No | Set `true` to disable auto-invocation (slash command only). Default: `false`. |
 
 **No `version`, `updated`, `changelog` in SKILL.md frontmatter.** Those belong in `plugin.json`.
@@ -72,26 +72,29 @@ description: "What this skill does and when to use it. Claude uses this to decid
 
 ## Skill Naming Convention (중요)
 
-스킬의 **디렉토리명**과 **frontmatter `name`**이 슬래시 명령어 표시 방식을 결정한다.
+스킬의 **디렉토리명**과 **frontmatter**가 슬래시 명령어 표시 방식을 결정한다.
 
 **공식 문서 (https://code.claude.com/docs/en/skills):**
 > Plugin `skills/` subdirectory → Directory name, namespaced by plugin
-> `name` field sets the display label shown in skill listings.
-
-### 실제 동작 규칙
-
-| 디렉토리명 | frontmatter name | 목록 표시 | 비고 |
-|---|---|---|---|
-| `init` | `init` | `/init (plugin-name)` | 플러그인 식별 불가, 다른 스킬과 충돌 위험 |
-| `{plugin}-init` | `{plugin}-init` | `/{plugin}:{plugin}-init (plugin-name)` | 플러그인 식별 가능, 충돌 없음 |
+> Example: `my-plugin/skills/review/SKILL.md` → `/my-plugin:review`
 
 ### 규칙
 
 1. **디렉토리명 = frontmatter `name`**: 항상 일치시킨다
-2. **플러그인명을 접두사로 포함**: `{plugin-name}-{command}` 형태로 명명한다
-   - 좋은 예: `daily-log-init`, `daily-log-log`, `daily-log-remind`
-   - 나쁜 예: `init`, `log`, `remind` (다른 플러그인/빌트인과 충돌)
-3. **description에 `(plugin-name)` 넣지 않기**: Claude Code가 자동으로 추가한다
+2. **디렉토리명은 단순하게**: `init`, `log`, `remind` 등. 호출은 `/{plugin}:{name}` 형태
+3. **description에 `(plugin-name)` 접두사 필수**: 목록에서 어떤 플러그인의 스킬인지 식별 가능하게 함
+
+### 예시
+
+```yaml
+# 플러그인: daily-log, 디렉토리: skills/init/SKILL.md
+---
+name: init
+description: "(daily-log) 초기 설정. tasks 레포 URL을 입력받아..."
+---
+```
+
+호출: `/daily-log:init`
 
 ---
 
@@ -104,7 +107,7 @@ Users invoke skills as:
 /{plugin-name}:{skill-name} arguments
 ```
 
-Example: `/daily-log:daily-log-init`
+Example: `/daily-log:init`
 
 ---
 
@@ -173,6 +176,6 @@ Example: `/daily-log:daily-log-init`
 |---|---|---|
 | `flutter-supabase-setup` | `/flutter-supabase-setup:init` | Flutter + Supabase 개발환경 셋업 (기획서 → 프로젝트 생성) |
 | `flutter-supabase-setup` | `/flutter-supabase-setup:env` | Supabase 크레덴셜 설정 (.env 생성) |
-| `daily-log` | `/daily-log:daily-log-init` | tasks 레포 클론 및 초기 설정 |
-| `daily-log` | `/daily-log:daily-log-log` | 오늘의 작업 로그 기록 (Completed + Remind) |
-| `daily-log` | `/daily-log:daily-log-remind` | 최근 미완료 리마인드 항목 표시 |
+| `daily-log` | `/daily-log:init` | tasks 레포 클론 및 초기 설정 |
+| `daily-log` | `/daily-log:log` | 오늘의 작업 로그 기록 (Completed + Remind) |
+| `daily-log` | `/daily-log:remind` | 최근 미완료 리마인드 항목 표시 |

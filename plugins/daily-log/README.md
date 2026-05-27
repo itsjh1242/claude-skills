@@ -11,24 +11,24 @@ GitHub 레포 기반 일일업무일지 관리 플러그인. 여러 프로젝트
 
 ## 명령어
 
-### `/daily-log:daily-log-init`
+### `/daily-log:init`
 
 tasks 레포를 로컬에 클론하고 초기 설정을 생성한다.
 
 ```
-/daily-log:daily-log-init
+/daily-log:init
 ```
 
 - tasks 레포 URL 입력
 - `~/.daily-log/repo/`에 clone
 - `~/.daily-log/config.json` 생성
 
-### `/daily-log:daily-log-log`
+### `/daily-log:log`
 
 오늘의 작업 로그를 기록한다.
 
 ```
-/daily-log:daily-log-log
+/daily-log:log
 ```
 
 - git log 자동 분석 → Completed 항목 생성
@@ -36,12 +36,12 @@ tasks 레포를 로컬에 클론하고 초기 설정을 생성한다.
 - Remind 항목 수집 (이전 미완료 carry-over + 신규)
 - tasks 레포에 commit & push
 
-### `/daily-log:daily-log-remind`
+### `/daily-log:remind`
 
 최근 미완료 Remind 항목을 표시한다.
 
 ```
-/daily-log:daily-log-remind
+/daily-log:remind
 ```
 
 - 최근 7일간 로그에서 미완료 항목 검색
@@ -93,11 +93,11 @@ daily-log/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── skills/
-│   ├── daily-log-init/
+│   ├── init/
 │   │   └── SKILL.md
-│   ├── daily-log-log/
+│   ├── log/
 │   │   └── SKILL.md
-│   └── daily-log-remind/
+│   └── remind/
 │       └── SKILL.md
 └── README.md
 ```
