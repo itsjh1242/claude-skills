@@ -9,7 +9,7 @@ Flutter + Supabase **development environment** setup. Auto-discovers planning do
 /plugin marketplace add itsjh1242/claude-skills
 
 # 2. Install plugin
-/plugin install flutter-supabase-setup
+/plugin install flutter-supabase-setup@itsjh-plugins
 ```
 
 ## Commands
