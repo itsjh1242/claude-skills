@@ -1,0 +1,9 @@
+{
+  "name": "daily-log",
+  "description": "GitHub-based daily work log management. Records completed tasks and reminders across multiple projects into a shared tasks repository, organized by date.",
+  "author": {
+    "name": "itsjh1242"
+  },
+  "repository": "https://github.com/itsjh1242/claude-skills",
+  "license": "MIT"
+}
