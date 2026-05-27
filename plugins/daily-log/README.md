@@ -6,7 +6,7 @@ GitHub 레포 기반 일일업무일지 관리 플러그인. 여러 프로젝트
 
 ```bash
 /plugin marketplace add itsjh1242/claude-skills
-/plugin install daily-log@itsjh-plugins
+/plugin install daily-log
 ```
 
 ## 명령어
