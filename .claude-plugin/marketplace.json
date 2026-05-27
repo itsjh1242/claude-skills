@@ -9,21 +9,13 @@
     {
       "name": "flutter-supabase-setup",
       "description": "Flutter + Supabase development environment setup. Auto-discovers planning docs, infers project config.",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/itsjh1242/claude-skills.git",
-        "path": "plugins/flutter-supabase-setup"
-      },
+      "source": "./plugins/flutter-supabase-setup",
       "category": "development"
     },
     {
       "name": "daily-log",
       "description": "GitHub-based daily work log management. Records completed tasks and reminders across multiple projects into a shared tasks repo.",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/itsjh1242/claude-skills.git",
-        "path": "plugins/daily-log"
-      },
+      "source": "./plugins/daily-log",
       "category": "productivity"
     }
   ]
