@@ -1,6 +1,6 @@
 ---
 name: remind
-description: "(daily-log) 최근 로그에서 미완료 Remind 항목을 표시한다. 현재 프로젝트의 이어서 할 작업 목록을 보여준다. Use when: user says '리마인드', 'remind', '할 일 확인', '어제 뭐 남았지', '이어서 할 거', '미완료'. Do NOT use when: user wants to write a new log (use log), or initial setup (use init)."
+description: "최근 로그에서 미완료 Remind 항목을 표시한다. 현재 프로젝트의 이어서 할 작업 목록을 보여준다. Use when: user says '리마인드', 'remind', '할 일 확인', '어제 뭐 남았지', '이어서 할 거', '미완료'. Do NOT use when: user wants to write a new log (use log), or initial setup (use init)."
 ---
 
 # daily-log — remind

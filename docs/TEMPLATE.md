@@ -56,14 +56,14 @@ A single plugin can contain multiple skills (multiple directories under `skills/
 ```yaml
 ---
 name: "{command}"
-description: "({plugin-name}) What this skill does and when to use it."
+description: "What this skill does and when to use it."
 ---
 ```
 
 | Field | Required | Description |
 |---|---|---|
 | `name` | Yes | 스킬 명령어 이름. 디렉토리명과 일치시킨다. |
-| `description` | Yes | **`(plugin-name)` 접두사를 반드시 포함**한다. Claude가 auto-invoke 여부를 판단하는 데 사용. trigger/anti-trigger 포함. |
+| `description` | Yes | Claude가 auto-invoke 여부를 판단하는 데 사용. trigger/anti-trigger 포함. `(plugin-name)` 접두사는 Claude Code가 자동 추가하므로 **넣지 않는다**. |
 | `disable-model-invocation` | No | Set `true` to disable auto-invocation (slash command only). Default: `false`. |
 
 **No `version`, `updated`, `changelog` in SKILL.md frontmatter.** Those belong in `plugin.json`.
@@ -82,7 +82,7 @@ description: "({plugin-name}) What this skill does and when to use it."
 
 1. **디렉토리명 = frontmatter `name`**: 항상 일치시킨다
 2. **디렉토리명은 단순하게**: `init`, `log`, `remind` 등. 호출은 `/{plugin}:{name}` 형태
-3. **description에 `(plugin-name)` 접두사 필수**: 목록에서 어떤 플러그인의 스킬인지 식별 가능하게 함
+3. **description에 `(plugin-name)` 접두사 넣지 않기**: Claude Code가 자동으로 추가한다. 수동으로 넣으면 중복 표시됨
 
 ### 예시
 
@@ -90,9 +90,11 @@ description: "({plugin-name}) What this skill does and when to use it."
 # 플러그인: daily-log, 디렉토리: skills/init/SKILL.md
 ---
 name: init
-description: "(daily-log) 초기 설정. tasks 레포 URL을 입력받아..."
+description: "초기 설정. tasks 레포 URL을 입력받아..."
 ---
 ```
+
+목록 표시: `/init    (daily-log) 초기 설정. tasks 레포 URL을 입력받아...`
 
 호출: `/daily-log:init`
 

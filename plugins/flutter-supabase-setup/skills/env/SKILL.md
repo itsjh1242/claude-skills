@@ -1,6 +1,6 @@
 ---
 name: env
-description: "(flutter-supabase-setup) Flutter + Supabase 프로젝트의 Supabase 크레덴셜(URL, Anon Key)을 설정한다. .env 파일을 생성/업데이트하고 연결 상태를 확인한다. Use when: user wants to configure Supabase credentials, says 'Supabase 연결', 'env 설정', 'credentials'. Do NOT use when: project doesn't exist yet (run init first)."
+description: "Flutter + Supabase 프로젝트의 Supabase 크레덴셜(URL, Anon Key)을 설정한다. .env 파일을 생성/업데이트하고 연결 상태를 확인한다. Use when: user wants to configure Supabase credentials, says 'Supabase 연결', 'env 설정', 'credentials'. Do NOT use when: project doesn't exist yet (run init first)."
 ---
 
 # Flutter + Supabase Setup — env
