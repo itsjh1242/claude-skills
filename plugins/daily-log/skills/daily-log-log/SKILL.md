@@ -1,6 +1,6 @@
 ---
-name: log
-description: "오늘의 작업 로그를 기록한다. git log를 자동 분석하여 Completed 항목을 생성하고, Remind 항목을 사용자에게 확인받은 후, tasks 레포의 일일 마크다운 파일에 기록/커밋/푸시한다. Use when: user says '오늘 로그', 'daily log', '작업 기록', '업무 정리', '일일업무', 'log 기록'. Do NOT use when: user wants to read reminders (use remind), or initial setup (use init)."
+name: daily-log-log
+description: "(daily-log) 오늘의 작업 로그를 기록한다. git log를 자동 분석하여 Completed 항목을 생성하고, Remind 항목을 사용자에게 확인받은 후, tasks 레포의 일일 마크다운 파일에 기록/커밋/푸시한다. Use when: user says '오늘 로그', 'daily log', '작업 기록', '업무 정리', '일일업무', 'log 기록'. Do NOT use when: user wants to read reminders (use remind), or initial setup (use init)."
 ---
 
 # daily-log — log
@@ -16,7 +16,7 @@ description: "오늘의 작업 로그를 기록한다. git log를 자동 분석�
 1. `~/.daily-log/config.json` 존재 확인. 없으면:
    ```
    daily-log이 아직 설정되지 않았습니다.
-   `/daily-log:init`을 먼저 실행해주세요.
+   `/daily-log:daily-log-init`을 먼저 실행해주세요.
    ```
 2. config를 읽어 `local_path`, `repo_url`, `default_branch` 확인
 3. `local_path` 디렉토리가 유효한 git repo인지 확인. 아니면 재클론 시도

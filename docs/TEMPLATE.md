@@ -137,6 +137,6 @@ Users add with: `/plugin marketplace add owner/repo`
 |---|---|---|
 | `flutter-supabase-setup` | `/flutter-supabase-setup:init` | Flutter + Supabase 개발환경 셋업 (기획서 → 프로젝트 생성) |
 | `flutter-supabase-setup` | `/flutter-supabase-setup:env` | Supabase 크레덴셜 설정 (.env 생성) |
-| `daily-log` | `/daily-log:init` | tasks 레포 클론 및 초기 설정 |
-| `daily-log` | `/daily-log:log` | 오늘의 작업 로그 기록 (Completed + Remind) |
-| `daily-log` | `/daily-log:remind` | 최근 미완료 리마인드 항목 표시 |
+| `daily-log` | `/daily-log:daily-log-init` | tasks 레포 클론 및 초기 설정 |
+| `daily-log` | `/daily-log:daily-log-log` | 오늘의 작업 로그 기록 (Completed + Remind) |
+| `daily-log` | `/daily-log:daily-log-remind` | 최근 미완료 리마인드 항목 표시 |

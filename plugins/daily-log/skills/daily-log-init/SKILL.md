@@ -1,6 +1,6 @@
 ---
-name: init
-description: "daily-log 초기 설정. tasks 레포 URL을 입력받아 로컬에 클론하고 설정 파일을 생성한다. Use when: user says 'daily-log 설정', 'daily-log init', '일일 로그 초기화', '업무일지 셋업'. Do NOT use when: already initialized and just wanting to log or check reminders."
+name: daily-log-init
+description: "(daily-log) 초기 설정. tasks 레포 URL을 입력받아 로컬에 클론하고 설정 파일을 생성한다. Use when: user says 'daily-log 설정', 'daily-log init', '일일 로그 초기화', '업무일지 셋업'. Do NOT use when: already initialized and just wanting to log or check reminders."
 ---
 
 # daily-log — init
@@ -92,8 +92,8 @@ tasks 레포를 로컬에 클론하고 `~/.daily-log/config.json` 설정 파일�
 | 브랜치 | {default_branch} |
 
 ### 사용 방법
-- `/daily-log:log` — 오늘의 작업 로그 기록
-- `/daily-log:remind` — 미완료 리마인드 항목 확인
+- `/daily-log:daily-log-log` — 오늘의 작업 로그 기록
+- `/daily-log:daily-log-remind` — 미완료 리마인드 항목 확인
 ```
 
 ---
